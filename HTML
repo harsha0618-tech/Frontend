@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTML Complete Reference – Beginner's Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --card: #21253a;
+      --border: #2e3352;
+      --accent: #7c6af7;
+      --accent2: #38d9a9;
+      --accent3: #ffa94d;
+      --accent4: #f06595;
+      --text: #e8eaf6;
+      --muted: #8892b0;
+      --code-bg: #12141e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 0 0 80px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a1d27 0%, #12141e 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 48px 40px 36px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+    header h1 span { color: var(--accent); }
+    header p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      color: #fff;
+      border-color: var(--accent);
+      background: rgba(124,106,247,0.12);
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      margin: 48px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title .icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .section-title h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .section-title p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* ── TAG CARDS ── */
+    .tag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .tag-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .tag-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .tag-card .tag-name {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 4px;
+    }
+    .tag-card .tag-desc {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .tag-card .tag-example {
+      background: var(--code-bg);
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: #a8d8ff;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border-left: 3px solid var(--accent);
+    }
+    .self-closing .tag-name::after {
+      content: " (self-closing)";
+      font-size: 0.7rem;
+      color: var(--accent3);
+      font-family: 'Nunito', sans-serif;
+    }
+
+    /* ── ATTRIBUTE SECTION ── */
+    .attr-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+    }
+    .attr-table th {
+      background: var(--surface);
+      color: var(--accent);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .attr-table td {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .attr-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .attr-table td:first-child {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent3);
+      white-space: nowrap;
+    }
+    .attr-table td:last-child {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: #a8d8ff;
+    }
+
+    /* ── TIP BOX ── */
+    .tip {
+      background: rgba(56,217,169,0.07);
+      border-left: 4px solid var(--accent2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.87rem;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+    .tip strong { color: var(--accent2); }
+
+    .warn {
+      background: rgba(255,169,77,0.07);
+      border-left: 4px solid var(--accent3);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.87rem;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+    .warn strong { color: var(--accent3); }
+
+    /* ── SKELETON / BOILERPLATE ── */
+    .boilerplate {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: #a8d8ff;
+      overflow-x: auto;
+      margin-bottom: 10px;
+    }
+    .boilerplate .c-tag   { color: #7c6af7; }
+    .boilerplate .c-attr  { color: #ffa94d; }
+    .boilerplate .c-val   { color: #38d9a9; }
+    .boilerplate .c-text  { color: #e8eaf6; }
+    .boilerplate .c-comment { color: #4e5a7a; font-style: italic; }
+
+    /* ── DIVIDER ── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* color dot indicator */
+    .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏷️ <span>HTML</span> Complete Reference</h1>
+  <p>Every tag you need — explained simply, with examples.</p>
+  <span class="badge">Beginner Friendly</span>
+</header>
+
+<nav>
+  <a href="#boilerplate">📄 Boilerplate</a>
+  <a href="#structure">🏗 Structure</a>
+  <a href="#text">✏️ Text</a>
+  <a href="#lists">📋 Lists</a>
+  <a href="#links-media">🔗 Links & Media</a>
+  <a href="#tables">📊 Tables</a>
+  <a href="#forms">📝 Forms</a>
+  <a href="#semantic">🧠 Semantic</a>
+  <a href="#meta">⚙️ Meta & Head</a>
+  <a href="#attributes">🎛 Attributes</a>
+</nav>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ BOILERPLATE -->
+  <div class="section-title" id="boilerplate">
+    <div class="icon" style="background:rgba(124,106,247,0.15)">📄</div>
+    <div>
+      <h2>The HTML Boilerplate</h2>
+      <p>Every HTML file should start with this skeleton.</p>
+    </div>
+  </div>
+
+  <div class="boilerplate">
+<span class="c-tag">&lt;!DOCTYPE html&gt;</span>                        <span class="c-comment">&lt;!-- tells the browser: this is HTML5 --&gt;</span>
+<span class="c-tag">&lt;html</span> <span class="c-attr">lang</span>=<span class="c-val">"en"</span><span class="c-tag">&gt;</span>                          <span class="c-comment">&lt;!-- root element, lang sets the language --&gt;</span>
+
+  <span class="c-tag">&lt;head&gt;</span>                                    <span class="c-comment">&lt;!-- invisible info about your page --&gt;</span>
+    <span class="c-tag">&lt;meta</span> <span class="c-attr">charset</span>=<span class="c-val">"UTF-8"</span><span class="c-tag"> /&gt;</span>              <span class="c-comment">&lt;!-- support all characters --&gt;</span>
+    <span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-val">"viewport"</span> <span class="c-attr">content</span>=<span class="c-val">"width=device-width, initial-scale=1.0"</span><span class="c-tag"> /&gt;</span>
+    <span class="c-tag">&lt;title&gt;</span><span class="c-text">My Page Title</span><span class="c-tag">&lt;/title&gt;</span>           <span class="c-comment">&lt;!-- shows in browser tab --&gt;</span>
+    <span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-val">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-val">"style.css"</span><span class="c-tag"> /&gt;</span>  <span class="c-comment">&lt;!-- link to your CSS file --&gt;</span>
+  <span class="c-tag">&lt;/head&gt;</span>
+
+  <span class="c-tag">&lt;body&gt;</span>                                    <span class="c-comment">&lt;!-- everything visible goes here --&gt;</span>
+    <span class="c-tag">&lt;h1&gt;</span><span class="c-text">Hello, World!</span><span class="c-tag">&lt;/h1&gt;</span>
+  <span class="c-tag">&lt;/body&gt;</span>
+
+<span class="c-tag">&lt;/html&gt;</span>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Tip:</strong> In VS Code, type <code>!</code> and press <kbd>Tab</kbd> — it auto-generates this boilerplate for you!
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ STRUCTURE -->
+  <hr/>
+  <div class="section-title" id="structure">
+    <div class="icon" style="background:rgba(124,106,247,0.15)">🏗</div>
+    <div>
+      <h2>Structure Tags</h2>
+      <p>The skeleton of your page — every HTML document uses these.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;!DOCTYPE html&gt;</div>
+      <div class="tag-desc">Not a tag — a declaration. Tells the browser you're writing HTML5. Always the very first line.</div>
+      <div class="tag-example">&lt;!DOCTYPE html&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;html&gt;</div>
+      <div class="tag-desc">The root (top-level) element. Everything goes inside it.</div>
+      <div class="tag-example">&lt;html lang="en"&gt; ... &lt;/html&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;head&gt;</div>
+      <div class="tag-desc">Contains invisible info about the page (title, links to CSS, etc). Not shown on screen.</div>
+      <div class="tag-example">&lt;head&gt; ... &lt;/head&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;body&gt;</div>
+      <div class="tag-desc">Everything visible on the page goes here — text, images, buttons, etc.</div>
+      <div class="tag-example">&lt;body&gt; ... &lt;/body&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;div&gt;</div>
+      <div class="tag-desc">A generic block container. Used to group elements together (like a box). No visual styling by default.</div>
+      <div class="tag-example">&lt;div class="card"&gt;
+  content here
+&lt;/div&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;span&gt;</div>
+      <div class="tag-desc">A generic inline container. Used to style a part of text without breaking the line.</div>
+      <div class="tag-example">&lt;p&gt;My &lt;span style="color:red"&gt;name&lt;/span&gt; is Ali&lt;/p&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ TEXT -->
+  <hr/>
+  <div class="section-title" id="text">
+    <div class="icon" style="background:rgba(56,217,169,0.15)">✏️</div>
+    <div>
+      <h2>Text Tags</h2>
+      <p>For headings, paragraphs, emphasis, and formatting text.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;h1&gt; to &lt;h6&gt;</div>
+      <div class="tag-desc">Headings. h1 is the biggest and most important. h6 is the smallest. Use only one &lt;h1&gt; per page.</div>
+      <div class="tag-example">&lt;h1&gt;Big Title&lt;/h1&gt;
+&lt;h2&gt;Sub Title&lt;/h2&gt;
+&lt;h6&gt;Tiny Heading&lt;/h6&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;p&gt;</div>
+      <div class="tag-desc">A paragraph. Adds space above and below automatically.</div>
+      <div class="tag-example">&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;strong&gt;</div>
+      <div class="tag-desc">Makes text bold AND tells the browser it's important (semantic meaning). Preferred over &lt;b&gt;.</div>
+      <div class="tag-example">&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt;.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;b&gt;</div>
+      <div class="tag-desc">Makes text visually bold only — no extra meaning. Use &lt;strong&gt; when the content matters.</div>
+      <div class="tag-example">&lt;p&gt;This is &lt;b&gt;bold&lt;/b&gt; text.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;em&gt;</div>
+      <div class="tag-desc">Italicizes text AND adds emphasis (semantic). Screen readers stress this word.</div>
+      <div class="tag-example">&lt;p&gt;I &lt;em&gt;really&lt;/em&gt; love coding.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;i&gt;</div>
+      <div class="tag-desc">Italicizes text visually only — no emphasis meaning. Often used for icons or foreign words.</div>
+      <div class="tag-example">&lt;p&gt;The word &lt;i&gt;café&lt;/i&gt; is French.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;u&gt;</div>
+      <div class="tag-desc">Underlines text. (Avoid using it for links — it confuses users.)</div>
+      <div class="tag-example">&lt;p&gt;&lt;u&gt;Underlined&lt;/u&gt; text.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;s&gt;</div>
+      <div class="tag-desc">Strikethrough text — shows something is no longer relevant (like a sale price).</div>
+      <div class="tag-example">&lt;p&gt;Price: &lt;s&gt;$100&lt;/s&gt; $60&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;mark&gt;</div>
+      <div class="tag-desc">Highlights text (like a yellow highlighter pen).</div>
+      <div class="tag-example">&lt;p&gt;Remember: &lt;mark&gt;this is important&lt;/mark&gt;&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;small&gt;</div>
+      <div class="tag-desc">Makes text smaller. Good for fine print or disclaimers.</div>
+      <div class="tag-example">&lt;p&gt;&lt;small&gt;Terms and conditions apply.&lt;/small&gt;&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;blockquote&gt;</div>
+      <div class="tag-desc">A long quote from another source. Usually indented by browsers.</div>
+      <div class="tag-example">&lt;blockquote&gt;
+  "Be the change you wish to see."
+&lt;/blockquote&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;q&gt;</div>
+      <div class="tag-desc">A short inline quote. Browser automatically adds quotation marks around it.</div>
+      <div class="tag-example">&lt;p&gt;He said &lt;q&gt;hello&lt;/q&gt;.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;code&gt;</div>
+      <div class="tag-desc">Displays text in a monospace (code) font. Used for inline code snippets.</div>
+      <div class="tag-example">&lt;p&gt;Use &lt;code&gt;console.log()&lt;/code&gt; to debug.&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;pre&gt;</div>
+      <div class="tag-desc">Preserves whitespace and line breaks exactly as typed. Good for code blocks.</div>
+      <div class="tag-example">&lt;pre&gt;
+  function hi() {
+    return "hello";
+  }
+&lt;/pre&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;br&gt;</div>
+      <div class="tag-desc">A line break. Forces text to the next line without starting a new paragraph.</div>
+      <div class="tag-example">&lt;p&gt;Line one&lt;br&gt;Line two&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;hr&gt;</div>
+      <div class="tag-desc">A horizontal rule — draws a dividing line across the page.</div>
+      <div class="tag-example">&lt;p&gt;Section one&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Section two&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;sub&gt; / &lt;sup&gt;</div>
+      <div class="tag-desc">&lt;sub&gt; = subscript (below the line). &lt;sup&gt; = superscript (above the line). Used in math/science.</div>
+      <div class="tag-example">&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;
+&lt;p&gt;x&lt;sup&gt;2&lt;/sup&gt; = 4&lt;/p&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;abbr&gt;</div>
+      <div class="tag-desc">Abbreviation. Shows full meaning on hover via the title attribute.</div>
+      <div class="tag-example">&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ LISTS -->
+  <hr/>
+  <div class="section-title" id="lists">
+    <div class="icon" style="background:rgba(255,169,77,0.15)">📋</div>
+    <div>
+      <h2>List Tags</h2>
+      <p>Ordered lists, unordered lists, and description lists.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;ul&gt;</div>
+      <div class="tag-desc">Unordered list — shows bullet points. Items have no particular order.</div>
+      <div class="tag-example">&lt;ul&gt;
+  &lt;li&gt;Apples&lt;/li&gt;
+  &lt;li&gt;Bananas&lt;/li&gt;
+&lt;/ul&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;ol&gt;</div>
+      <div class="tag-desc">Ordered list — shows numbers (1, 2, 3...). Items have a sequence.</div>
+      <div class="tag-example">&lt;ol&gt;
+  &lt;li&gt;Wake up&lt;/li&gt;
+  &lt;li&gt;Brush teeth&lt;/li&gt;
+&lt;/ol&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;li&gt;</div>
+      <div class="tag-desc">List item. Always goes inside &lt;ul&gt; or &lt;ol&gt;.</div>
+      <div class="tag-example">&lt;li&gt;This is one item&lt;/li&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</div>
+      <div class="tag-desc">Description list. &lt;dt&gt; = term (word). &lt;dd&gt; = definition. Like a glossary.</div>
+      <div class="tag-example">&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;A markup language&lt;/dd&gt;
+&lt;/dl&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ LINKS & MEDIA -->
+  <hr/>
+  <div class="section-title" id="links-media">
+    <div class="icon" style="background:rgba(240,101,149,0.15)">🔗</div>
+    <div>
+      <h2>Links & Media Tags</h2>
+      <p>Hyperlinks, images, videos, audio, and more.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;a&gt;</div>
+      <div class="tag-desc">Anchor tag — creates a clickable hyperlink. Use href to set the URL. target="_blank" opens in new tab.</div>
+      <div class="tag-example">&lt;a href="https://google.com"&gt;Visit Google&lt;/a&gt;
+
+&lt;!-- Open in new tab --&gt;
+&lt;a href="https://google.com" target="_blank"&gt;Google&lt;/a&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;img&gt;</div>
+      <div class="tag-desc">Displays an image. src is the image path. alt is the description (required for accessibility).</div>
+      <div class="tag-example">&lt;img src="photo.jpg" alt="A sunset photo" width="300"&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;video&gt;</div>
+      <div class="tag-desc">Embeds a video. Use controls to show play/pause button. Add multiple &lt;source&gt; for compatibility.</div>
+      <div class="tag-example">&lt;video controls width="400"&gt;
+  &lt;source src="clip.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;audio&gt;</div>
+      <div class="tag-desc">Embeds an audio player. Same idea as video — use controls attribute.</div>
+      <div class="tag-example">&lt;audio controls&gt;
+  &lt;source src="song.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;iframe&gt;</div>
+      <div class="tag-desc">Embeds another webpage inside your page. Common for embedding YouTube videos or maps.</div>
+      <div class="tag-example">&lt;iframe
+  src="https://www.youtube.com/embed/abc"
+  width="560" height="315"&gt;
+&lt;/iframe&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;figure&gt; &amp; &lt;figcaption&gt;</div>
+      <div class="tag-desc">&lt;figure&gt; wraps media (image/video). &lt;figcaption&gt; adds a visible caption below it.</div>
+      <div class="tag-example">&lt;figure&gt;
+  &lt;img src="cat.jpg" alt="A cat"&gt;
+  &lt;figcaption&gt;My cat Mochi&lt;/figcaption&gt;
+&lt;/figure&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;picture&gt;</div>
+      <div class="tag-desc">Advanced image tag — lets you serve different images for different screen sizes (responsive images).</div>
+      <div class="tag-example">&lt;picture&gt;
+  &lt;source media="(min-width:600px)" srcset="big.jpg"&gt;
+  &lt;img src="small.jpg" alt="Image"&gt;
+&lt;/picture&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ TABLES -->
+  <hr/>
+  <div class="section-title" id="tables">
+    <div class="icon" style="background:rgba(124,106,247,0.15)">📊</div>
+    <div>
+      <h2>Table Tags</h2>
+      <p>Display data in rows and columns.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Remember:</strong> Tables are for displaying data — not for page layout! Use &lt;div&gt; and CSS for layout.
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;table&gt;</div>
+      <div class="tag-desc">The outer wrapper that creates a table.</div>
+      <div class="tag-example">&lt;table&gt; ... &lt;/table&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;tr&gt;</div>
+      <div class="tag-desc">Table row — a horizontal row of cells.</div>
+      <div class="tag-example">&lt;tr&gt; ... &lt;/tr&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;th&gt;</div>
+      <div class="tag-desc">Table header cell — bold and centered by default. Used for column titles.</div>
+      <div class="tag-example">&lt;th&gt;Name&lt;/th&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;td&gt;</div>
+      <div class="tag-desc">Table data cell — a regular cell that holds content.</div>
+      <div class="tag-example">&lt;td&gt;John&lt;/td&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;thead&gt; / &lt;tbody&gt; / &lt;tfoot&gt;</div>
+      <div class="tag-desc">Group rows into header, body, and footer sections. Optional but good practice.</div>
+      <div class="tag-example">&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Ali&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;caption&gt;</div>
+      <div class="tag-desc">Adds a title/description above the table.</div>
+      <div class="tag-example">&lt;table&gt;
+  &lt;caption&gt;Student Marks&lt;/caption&gt;
+  ...
+&lt;/table&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ FORMS -->
+  <hr/>
+  <div class="section-title" id="forms">
+    <div class="icon" style="background:rgba(56,217,169,0.15)">📝</div>
+    <div>
+      <h2>Form Tags</h2>
+      <p>Collect input from users — text, buttons, checkboxes, and more.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;form&gt;</div>
+      <div class="tag-desc">The container for all form elements. action is where data is sent. method is how (GET or POST).</div>
+      <div class="tag-example">&lt;form action="/submit" method="POST"&gt;
+  ...
+&lt;/form&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;input&gt;</div>
+      <div class="tag-desc">The most versatile form element. Change the type attribute to get different inputs.</div>
+      <div class="tag-example">&lt;input type="text" placeholder="Your name"&gt;
+&lt;input type="email" placeholder="Email"&gt;
+&lt;input type="password"&gt;
+&lt;input type="number"&gt;
+&lt;input type="date"&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+&lt;input type="file"&gt;
+&lt;input type="submit" value="Send"&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;label&gt;</div>
+      <div class="tag-desc">A label for an input. Clicking the label focuses the input. Always pair with an input using for/id.</div>
+      <div class="tag-example">&lt;label for="name"&gt;Your Name:&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;textarea&gt;</div>
+      <div class="tag-desc">A multi-line text input. Use rows and cols to set the size.</div>
+      <div class="tag-example">&lt;textarea rows="4" cols="40"
+  placeholder="Write your message..."&gt;
+&lt;/textarea&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;select&gt; &amp; &lt;option&gt;</div>
+      <div class="tag-desc">A dropdown menu. &lt;select&gt; is the container, &lt;option&gt; is each choice.</div>
+      <div class="tag-example">&lt;select name="city"&gt;
+  &lt;option value="mysore"&gt;Mysore&lt;/option&gt;
+  &lt;option value="bangalore"&gt;Bangalore&lt;/option&gt;
+&lt;/select&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;button&gt;</div>
+      <div class="tag-desc">A clickable button. More flexible than &lt;input type="submit"&gt; — can contain HTML inside.</div>
+      <div class="tag-example">&lt;button type="submit"&gt;Send Form&lt;/button&gt;
+&lt;button type="button"&gt;Click Me&lt;/button&gt;
+&lt;button type="reset"&gt;Clear&lt;/button&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;fieldset&gt; &amp; &lt;legend&gt;</div>
+      <div class="tag-desc">Groups related form fields with a box border. &lt;legend&gt; gives the group a title.</div>
+      <div class="tag-example">&lt;fieldset&gt;
+  &lt;legend&gt;Personal Info&lt;/legend&gt;
+  &lt;input type="text" placeholder="Name"&gt;
+&lt;/fieldset&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;datalist&gt;</div>
+      <div class="tag-desc">Provides autocomplete suggestions for an input field. Linked using list and id attributes.</div>
+      <div class="tag-example">&lt;input list="browsers"&gt;
+&lt;datalist id="browsers"&gt;
+  &lt;option value="Chrome"&gt;
+  &lt;option value="Firefox"&gt;
+&lt;/datalist&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ SEMANTIC -->
+  <hr/>
+  <div class="section-title" id="semantic">
+    <div class="icon" style="background:rgba(240,101,149,0.15)">🧠</div>
+    <div>
+      <h2>Semantic Tags</h2>
+      <p>These tags describe meaning — great for SEO and screen readers.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 What is "semantic"?</strong> Semantic tags <em>describe what they contain</em>. &lt;div&gt; just means "box" — but &lt;nav&gt; says "this is navigation". Search engines and screen readers love this!
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card">
+      <div class="tag-name">&lt;header&gt;</div>
+      <div class="tag-desc">The top section of a page or article — typically has the logo, site name, or intro.</div>
+      <div class="tag-example">&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+&lt;/header&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;nav&gt;</div>
+      <div class="tag-desc">Navigation links — the menu bar of your website.</div>
+      <div class="tag-example">&lt;nav&gt;
+  &lt;a href="/home"&gt;Home&lt;/a&gt;
+  &lt;a href="/about"&gt;About&lt;/a&gt;
+&lt;/nav&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;main&gt;</div>
+      <div class="tag-desc">The main, central content of the page. Only one &lt;main&gt; per page.</div>
+      <div class="tag-example">&lt;main&gt;
+  &lt;h2&gt;Welcome!&lt;/h2&gt;
+  &lt;p&gt;This is the main content.&lt;/p&gt;
+&lt;/main&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;article&gt;</div>
+      <div class="tag-desc">A self-contained piece of content — like a blog post, news article, or forum post.</div>
+      <div class="tag-example">&lt;article&gt;
+  &lt;h2&gt;Blog Post Title&lt;/h2&gt;
+  &lt;p&gt;Post content here...&lt;/p&gt;
+&lt;/article&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;section&gt;</div>
+      <div class="tag-desc">A thematic section of a page — like "About Us" or "Our Services". Usually has a heading.</div>
+      <div class="tag-example">&lt;section&gt;
+  &lt;h2&gt;About Me&lt;/h2&gt;
+  &lt;p&gt;I am a developer...&lt;/p&gt;
+&lt;/section&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;aside&gt;</div>
+      <div class="tag-desc">Side content — like a sidebar, pull quote, or related links. Not the main focus.</div>
+      <div class="tag-example">&lt;aside&gt;
+  &lt;p&gt;Related: How to learn CSS&lt;/p&gt;
+&lt;/aside&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;footer&gt;</div>
+      <div class="tag-desc">The bottom of the page — often has copyright info, links, or contact details.</div>
+      <div class="tag-example">&lt;footer&gt;
+  &lt;p&gt;&copy; 2025 My Website&lt;/p&gt;
+&lt;/footer&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;details&gt; &amp; &lt;summary&gt;</div>
+      <div class="tag-desc">Creates a collapsible section. &lt;summary&gt; is the visible title. Click it to show/hide content.</div>
+      <div class="tag-example">&lt;details&gt;
+  &lt;summary&gt;Click to expand&lt;/summary&gt;
+  &lt;p&gt;Hidden content here!&lt;/p&gt;
+&lt;/details&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;time&gt;</div>
+      <div class="tag-desc">Marks up a date or time. The datetime attribute gives the machine-readable version.</div>
+      <div class="tag-example">&lt;time datetime="2025-01-01"&gt;New Year's Day&lt;/time&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;address&gt;</div>
+      <div class="tag-desc">Contact information for the author or owner of the page. Typically italicized.</div>
+      <div class="tag-example">&lt;address&gt;
+  Written by Ali &lt;br&gt;
+  &lt;a href="mailto:ali@email.com"&gt;Email me&lt;/a&gt;
+&lt;/address&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ META & HEAD -->
+  <hr/>
+  <div class="section-title" id="meta">
+    <div class="icon" style="background:rgba(255,169,77,0.15)">⚙️</div>
+    <div>
+      <h2>Head &amp; Meta Tags</h2>
+      <p>Tags that go inside &lt;head&gt; — they control how your page is seen by browsers &amp; search engines.</p>
+    </div>
+  </div>
+
+  <div class="tag-grid">
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;meta charset&gt;</div>
+      <div class="tag-desc">Sets the character encoding. UTF-8 supports almost every character in the world.</div>
+      <div class="tag-example">&lt;meta charset="UTF-8"&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;meta viewport&gt;</div>
+      <div class="tag-desc">Makes your site look good on mobile phones. Always include this.</div>
+      <div class="tag-example">&lt;meta name="viewport"
+  content="width=device-width, initial-scale=1.0"&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;meta description&gt;</div>
+      <div class="tag-desc">The description shown under your link in Google search results. Keep it under 160 characters.</div>
+      <div class="tag-example">&lt;meta name="description"
+  content="A beginner's guide to HTML."&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;meta keywords&gt;</div>
+      <div class="tag-desc">Keywords for search engines. (Modern search engines mostly ignore this now, but it's good practice.)</div>
+      <div class="tag-example">&lt;meta name="keywords" content="html, css, web"&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;title&gt;</div>
+      <div class="tag-desc">The page title shown in the browser tab and Google results.</div>
+      <div class="tag-example">&lt;title&gt;My Awesome Website&lt;/title&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;link&gt;</div>
+      <div class="tag-desc">Links an external file to the HTML page. Most commonly used to link CSS stylesheets or a favicon.</div>
+      <div class="tag-example">&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;link rel="icon" href="favicon.ico"&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;style&gt;</div>
+      <div class="tag-desc">Write CSS directly inside your HTML file. Better to use an external file for large projects.</div>
+      <div class="tag-example">&lt;style&gt;
+  body { background: lightblue; }
+  h1   { color: navy; }
+&lt;/style&gt;</div>
+    </div>
+    <div class="tag-card">
+      <div class="tag-name">&lt;script&gt;</div>
+      <div class="tag-desc">Add JavaScript to your page. Put it at the bottom of &lt;body&gt; so the page loads faster.</div>
+      <div class="tag-example">&lt;script src="app.js"&gt;&lt;/script&gt;
+
+&lt;!-- Or inline --&gt;
+&lt;script&gt;
+  alert("Hello!");
+&lt;/script&gt;</div>
+    </div>
+    <div class="tag-card self-closing">
+      <div class="tag-name">&lt;base&gt;</div>
+      <div class="tag-desc">Sets the base URL for all relative links on the page. Rarely used but good to know.</div>
+      <div class="tag-example">&lt;base href="https://mysite.com/"&gt;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ ATTRIBUTES -->
+  <hr/>
+  <div class="section-title" id="attributes">
+    <div class="icon" style="background:rgba(124,106,247,0.15)">🎛</div>
+    <div>
+      <h2>Common Attributes</h2>
+      <p>Attributes go inside the opening tag and give extra information or behaviour.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Syntax:</strong> <code>&lt;tagname attribute="value"&gt;</code> — the attribute always goes inside the opening tag.
+  </div>
+
+  <table class="attr-table">
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Works On</th>
+        <th>What It Does</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>id</td><td>Any element</td><td>Unique identifier. Must be unique on the page. Used by CSS & JavaScript.</td><td>&lt;div id="header"&gt;</td></tr>
+      <tr><td>class</td><td>Any element</td><td>Groups elements for styling. Multiple elements can share the same class.</td><td>&lt;p class="intro"&gt;</td></tr>
+      <tr><td>style</td><td>Any element</td><td>Adds inline CSS directly to the element. Avoid for large projects.</td><td>&lt;p style="color:red"&gt;</td></tr>
+      <tr><td>href</td><td>&lt;a&gt;, &lt;link&gt;</td><td>The URL to link to.</td><td>&lt;a href="https://..."&gt;</td></tr>
+      <tr><td>src</td><td>&lt;img&gt;, &lt;script&gt;, &lt;iframe&gt;</td><td>The path to an external file (image, script, etc.)</td><td>&lt;img src="photo.jpg"&gt;</td></tr>
+      <tr><td>alt</td><td>&lt;img&gt;</td><td>Describes the image for screen readers and if image fails to load.</td><td>&lt;img alt="A cat"&gt;</td></tr>
+      <tr><td>target</td><td>&lt;a&gt;</td><td>Where to open the link. _blank = new tab, _self = same tab (default).</td><td>&lt;a target="_blank"&gt;</td></tr>
+      <tr><td>type</td><td>&lt;input&gt;, &lt;button&gt;</td><td>Defines the kind of input (text, email, password, checkbox, etc.)</td><td>&lt;input type="email"&gt;</td></tr>
+      <tr><td>name</td><td>Form elements</td><td>Identifies the data when a form is submitted.</td><td>&lt;input name="username"&gt;</td></tr>
+      <tr><td>value</td><td>&lt;input&gt;, &lt;option&gt;</td><td>The default value or the value sent on form submission.</td><td>&lt;input value="John"&gt;</td></tr>
+      <tr><td>placeholder</td><td>&lt;input&gt;, &lt;textarea&gt;</td><td>Grey hint text shown inside the field before the user types.</td><td>&lt;input placeholder="Enter email"&gt;</td></tr>
+      <tr><td>required</td><td>Form elements</td><td>Makes a field mandatory — form won't submit if it's empty.</td><td>&lt;input required&gt;</td></tr>
+      <tr><td>disabled</td><td>Form elements</td><td>Disables the element — user can't interact with it.</td><td>&lt;button disabled&gt;</td></tr>
+      <tr><td>readonly</td><td>&lt;input&gt;, &lt;textarea&gt;</td><td>User can see the value but can't change it.</td><td>&lt;input readonly&gt;</td></tr>
+      <tr><td>checked</td><td>&lt;input type="checkbox/radio"&gt;</td><td>Makes a checkbox or radio button selected by default.</td><td>&lt;input type="checkbox" checked&gt;</td></tr>
+      <tr><td>width / height</td><td>&lt;img&gt;, &lt;video&gt;, &lt;table&gt;</td><td>Sets the dimensions in pixels (or %).</td><td>&lt;img width="300"&gt;</td></tr>
+      <tr><td>colspan / rowspan</td><td>&lt;td&gt;, &lt;th&gt;</td><td>Makes a table cell span multiple columns or rows.</td><td>&lt;td colspan="2"&gt;</td></tr>
+      <tr><td>action</td><td>&lt;form&gt;</td><td>The URL to send form data to when submitted.</td><td>&lt;form action="/login"&gt;</td></tr>
+      <tr><td>method</td><td>&lt;form&gt;</td><td>How to send form data. GET (visible in URL) or POST (hidden).</td><td>&lt;form method="POST"&gt;</td></tr>
+      <tr><td>lang</td><td>&lt;html&gt;</td><td>The language of the page content. "en" = English, "hi" = Hindi, etc.</td><td>&lt;html lang="en"&gt;</td></tr>
+      <tr><td>title</td><td>Any element</td><td>Shows a small tooltip when you hover over the element.</td><td>&lt;p title="Hint text"&gt;</td></tr>
+      <tr><td>data-*</td><td>Any element</td><td>Custom data attribute — store your own data on elements for JavaScript to use.</td><td>&lt;div data-id="42"&gt;</td></tr>
+      <tr><td>hidden</td><td>Any element</td><td>Hides the element completely (not visible, not taking up space).</td><td>&lt;p hidden&gt;</td></tr>
+      <tr><td>tabindex</td><td>Any element</td><td>Controls tab key order on the page. tabindex="0" includes it in normal tab flow.</td><td>&lt;div tabindex="0"&gt;</td></tr>
+      <tr><td>rel</td><td>&lt;a&gt;, &lt;link&gt;</td><td>Describes the relationship. "noopener noreferrer" for external links is a security best practice.</td><td>&lt;a rel="noopener"&gt;</td></tr>
+      <tr><td>controls</td><td>&lt;video&gt;, &lt;audio&gt;</td><td>Shows built-in play/pause/volume controls.</td><td>&lt;video controls&gt;</td></tr>
+      <tr><td>autoplay</td><td>&lt;video&gt;, &lt;audio&gt;</td><td>Starts playing automatically when the page loads.</td><td>&lt;video autoplay&gt;</td></tr>
+      <tr><td>loop</td><td>&lt;video&gt;, &lt;audio&gt;</td><td>Plays the media in a continuous loop.</td><td>&lt;video loop&gt;</td></tr>
+      <tr><td>muted</td><td>&lt;video&gt;</td><td>Starts the video with sound off.</td><td>&lt;video muted&gt;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <strong>⚠️ Note:</strong> Some attributes like <code>required</code>, <code>disabled</code>, <code>checked</code>, <code>hidden</code>, <code>loop</code>, and <code>muted</code> are <em>boolean attributes</em> — just writing them is enough. You don't need to set a value.
+  </div>
+
+  <hr style="margin-top:50px"/>
+
+  <footer>
+    <p>Made with ❤️ for a beginner's HTML journey &nbsp;·&nbsp; <span>Keep building!</span></p>
+    <p style="margin-top:6px">Next step → learn <strong>CSS</strong> to make it beautiful, then <strong>JavaScript</strong> to make it interactive.</p>
+  </footer>
+
+</div>
+</body>
+</html>
